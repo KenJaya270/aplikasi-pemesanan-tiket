@@ -17,6 +17,7 @@
 
     <!-- Custom styles for this template-->
     <link href="<?= BASEURL ?>/css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?= BASEURL ?>/css/style.css">
 
 </head>
 

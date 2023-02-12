@@ -1,5 +1,5 @@
 <?php
-define('BASEURL', 'http://localhost/ticket-and-pesawat/public');
+define('BASEURL', '/ticket-and-pesawat/public');
 define('CSS', BASEURL . '/css');
 define('JS', BASEURL . '/js');
 define('DBNAME', 'ticketing');

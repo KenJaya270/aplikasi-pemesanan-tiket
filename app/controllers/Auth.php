@@ -11,6 +11,7 @@ class Auth extends Controller
 
     public function register()
     {
+        Middleware::level('user');
         $data['judul'] = 'Register';
         $this->view('templates/header', $data);
         $this->view('auth/register');
@@ -19,7 +20,7 @@ class Auth extends Controller
 
     public function insertUser()
     {
-        if ($this->model('Penumpang_model')->insertUser() > 0) {
+        if ($this->model('Penumpang_model')->insertPenumpang() > 0) {
             Flasher::setFlash('success', 'Berhasil Memasukkan Data, Silahkan Login!');
             Redirect::to('auth');
         } else {
@@ -30,17 +31,26 @@ class Auth extends Controller
 
     public function userValidate()
     {
-        $_SESSION['kereta-and-pesawat'] = $this->model('Penumpang_model')->userValidate();
-        if (isset($_SESSION['kereta-and-pesawat']['id_petugas'])) {
-            if ($_SESSION['kereta-and-pesawat']['id_level'] == 1) {
-                Redirect::to('petugas');
-            }
+        if ($this->model('Penumpang_model')->penumpangValidate()) {
+            $_SESSION['kereta-and-pesawat'] = $this->model('Penumpang_model')->getPenumpang();
+            Redirect::to('user');
+        } else if ($this->model('Petugas_model')->petugasValidate()) {
+            $_SESSION['kereta-and-pesawat'] = $this->model('Petugas_model')->getPetugas();
             if ($_SESSION['kereta-and-pesawat']['id_level'] == 2) {
                 Redirect::to('admin');
+            } else {
+                Redirect::to('petugas');
             }
+        } else {
+            Flasher::setFlash('danger', 'Username atau Password salah');
+            Redirect::to('');
         }
-        if (isset($_SESSION['kereta-and-pesawat']['id_penumpang'])) {
-            Redirect::to('user');
-        }
+    }
+
+    public function logout()
+    {
+        session_destroy();
+        session_unset();
+        return Functions::back();
     }
 }

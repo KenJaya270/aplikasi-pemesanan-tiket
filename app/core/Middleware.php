@@ -9,17 +9,10 @@ class Middleware
         }
     }
 
+
     public static function level($level)
     {
-        Middleware::auth();
-        if (isset($_SESSION['kereta-and-pesawat']) && $level == '') {
-            return Functions::back();
-            exit;
-        }
-
-        if (!isset($_SESSION['kereta-and-pesawat']) || $level != $level) {
-            return Functions::back();
-            exit;
-        }
+        //pengaturan level, jika $level != level yang diset di controller, maka return back()
+        //soon....
     }
 }

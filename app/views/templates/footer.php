@@ -7,6 +7,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="<?= BASEURL ?>/js/sb-admin-2.min.js"></script>
+    <script src="<?= BASEURL ?>/js/pemilihanTiket.js"></script>
 
     <!-- Page level plugins -->
     <script src="<?= BASEURL ?>/vendor/chart.js/Chart.min.js"></script>
